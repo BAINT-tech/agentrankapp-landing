@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AgentRank - Home of AI Agents. Discover, rank, and launch the most powerful AI agents in the ecosystem.">
+    <meta name="keywords" content="AI agents, artificial intelligence, agent ranking, AI tools, machine learning">
+    <meta name="author" content="AgentRank">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://agentrankapp.xyz/">
+    <meta property="og:title" content="AgentRank - Home of AI Agents">
+    <meta property="og:description" content="Discover, rank, and launch the most powerful AI agents in the ecosystem.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://agentrankapp.xyz/">
+    <meta property="twitter:title" content="AgentRank - Home of AI Agents">
+    <meta property="twitter:description" content="Discover, rank, and launch the most powerful AI agents in the ecosystem.">
+    
+    <title>AgentRank - Home of AI Agents</title>
+    <link href="./output.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Hero Section -->
+        <section class="bg-green-800 min-h-screen flex flex-col justify-center items-center text-white px-4">
+            <div class="text-center max-w-4xl mx-auto">
+                <!-- Logo placeholder - will be replaced with actual logo -->
+                <div class="mb-8">
+                    <div class="w-24 h-24 sm:w-32 sm:h-32 mx-auto bg-white rounded-lg flex items-center justify-center">
+                        <span class="text-green-800 text-lg sm:text-2xl font-bold">AgentRank</span>
+                    </div>
+                </div>
+                
+                <!-- Main heading -->
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                    Home of AI Agents
+                </h1>
+                
+                <!-- Subheading -->
+                <p class="text-lg sm:text-xl md:text-2xl mb-8 text-green-100 max-w-3xl mx-auto">
+                    Discover, rank, and launch the most powerful AI agents in the ecosystem
+                </p>
+                
+                <!-- Call to Action Button -->
+                <button id="launch-agent-btn" class="bg-white text-green-800 px-6 py-3 sm:px-8 sm:py-4 rounded-lg text-lg sm:text-xl font-semibold hover:bg-green-50 transition-colors duration-300 shadow-lg">
+                    Launch Your Agent
+                </button>
+            </div>
+        </section>
+
+        <!-- Launch Agent Modal (hidden by default) -->
+        <div id="launch-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-lg p-6 sm:p-8 max-w-md w-full max-h-[90vh] overflow-y-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl sm:text-2xl font-bold text-gray-800">Launch Your Agent</h3>
+                    <button id="close-modal-btn" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                </div>
+                
+                <form id="launch-agent-form">
+                    <!-- Web2/Web3 Toggle -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Agent Type</label>
+                        <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0">
+                            <label class="flex items-center">
+                                <input type="radio" name="agentType" value="web2" checked class="mr-2">
+                                <span>Web2 Agent</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="agentType" value="web3" class="mr-2">
+                                <span>Web3 Agent</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Agent Name -->
+                    <div class="mb-4">
+                        <label for="agentName" class="block text-sm font-medium text-gray-700 mb-2">Agent Name *</label>
+                        <input type="text" id="agentName" name="agentName" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    
+                    <!-- Description -->
+                    <div class="mb-4">
+                        <label for="agentDescription" class="block text-sm font-medium text-gray-700 mb-2">Description *</label>
+                        <textarea id="agentDescription" name="agentDescription" required rows="3"
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
+                    </div>
+                    
+                    <!-- Category -->
+                    <div class="mb-4">
+                        <label for="agentCategory" class="block text-sm font-medium text-gray-700 mb-2">Category *</label>
+                        <select id="agentCategory" name="agentCategory" required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <option value="">Select a category</option>
+                            <option value="productivity">Productivity</option>
+                            <option value="creative">Creative</option>
+                            <option value="analytics">Analytics</option>
+                            <option value="customer-service">Customer Service</option>
+                            <option value="development">Development</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Avatar Upload -->
+                    <div class="mb-4">
+                        <label for="agentAvatar" class="block text-sm font-medium text-gray-700 mb-2">Avatar</label>
+                        <input type="file" id="agentAvatar" name="agentAvatar" accept="image/*"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    
+                    <!-- Wallet Address (Web3 only) -->
+                    <div id="walletAddressField" class="mb-4 hidden">
+                        <label for="walletAddress" class="block text-sm font-medium text-gray-700 mb-2">Wallet Address</label>
+                        <input type="text" id="walletAddress" name="walletAddress"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                               placeholder="0x...">
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                        <button type="submit" class="flex-1 bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors">
+                            Launch Agent
+                        </button>
+                        <button type="button" id="cancel-btn" class="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition-colors">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Agent Leaderboard Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Agent Leaderboard</h2>
+                
+                <!-- Loading state -->
+                <div id="loading-state" class="text-center py-8">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-green-800"></div>
+                    <p class="mt-2 text-gray-600">Loading agents...</p>
+                </div>
+                
+                <!-- Leaderboard table -->
+                <div id="leaderboard-container" class="hidden">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-green-800 text-white">
+                                    <tr>
+                                        <th class="px-6 py-4 text-left text-sm font-medium uppercase tracking-wider">Rank</th>
+                                        <th class="px-6 py-4 text-left text-sm font-medium uppercase tracking-wider">Agent</th>
+                                        <th class="px-6 py-4 text-left text-sm font-medium uppercase tracking-wider">Category</th>
+                                        <th class="px-6 py-4 text-left text-sm font-medium uppercase tracking-wider">Badge</th>
+                                        <th class="px-6 py-4 text-left text-sm font-medium uppercase tracking-wider">Score</th>
+                                        <th class="px-6 py-4 text-left text-sm font-medium uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leaderboard-body" class="bg-white divide-y divide-gray-200">
+                                    <!-- Agent rows will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Empty state -->
+                <div id="empty-state" class="hidden text-center py-12">
+                    <div class="text-gray-400 text-6xl mb-4">🤖</div>
+                    <h3 class="text-xl font-semibold text-gray-600 mb-2">No agents yet</h3>
+                    <p class="text-gray-500 mb-6">Be the first to launch an agent and claim the top spot!</p>
+                    <button onclick="openLaunchModal()" class="bg-green-800 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                        Launch First Agent
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="./main.js"></script>
+</body>
+</html>
+
